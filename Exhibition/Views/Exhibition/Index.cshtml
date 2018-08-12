@@ -1,0 +1,107 @@
+﻿@using Exhibition.Models
+@model User
+
+@{
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+
+}
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+@using (@Html.BeginForm())
+
+{
+    @Html.AntiForgeryToken()
+<form action="#" class="form-horizontal">
+    <div class="form-body">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <label class=" control-label">ФИО</label>
+            <div class="">
+                @Html.TextBoxFor(m => m.FullName, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Email Address</label>
+            <div class="">
+                <div class="input-group">
+                    @Html.TextBoxFor(m => m.Email, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class=" control-label">Телефон</label>
+            <div class="">
+                <div class="input-group">
+                    @Html.TextBoxFor(m => m.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Название компании</label>
+            <div class="">
+                <div class="input-icon">
+                    @Html.TextBoxFor(m => m.NameCompany, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class=" control-label">Страна</label>
+            <div class="">
+                <div class="input-icon left">
+                    @Html.DropDownListFor(model =>
+        Model.CountryId,
+        (List<SelectListItem>)ViewBag.CountryList, "-select- ", new { @class = "form-control", @id="Country"})
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Город</label>
+            <div class="">
+                <select id="City" name="CityId"></select><br />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Адрес СТО</label>
+            <div class="">
+                @Html.TextBoxFor(m => m.ServiceStationAddress, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class=" control-label">Вид деятельности</label>
+            <div class="">
+                @Html.TextBoxFor(m => m.Activity, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class=" control-label">Должность</label>
+            <div class="">
+                @Html.TextBoxFor(m => m.Position, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+    </div>
+    <div class="form-actions fluid">
+        <div class="col-md-offset-3 col-md-9">
+            <button type="submit" class="btn blue">Submit</button>
+            <button type="button" class="btn default">Cancel</button>
+        </div>
+    </div>
+</form>
+
+}
+
+<script>
+        $(document).ready(function () {
+            $("#Country").change(function () {
+                var id = $(this).val();
+                $("#City").empty();
+                $.get("City_Bind", { country_id: id }, function (data) {
+                    var v = "<option>---Select---</option>";
+                    $.each(data, function (i, v1) {
+                        v += "<option value=" + v1.Value + ">" + v1.Text + "</option>";
+                    });
+                    $("#City").html(v);
+                });
+            });
+        });
+</script>

@@ -1,0 +1,81 @@
+﻿@model List<Exhibition.Models.User>
+
+@{
+    ViewBag.Title = "GetClients";
+}
+
+<h2>GetClients</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            ФИО
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Телефон
+        </th>
+        <th>
+            Компания
+        </th>
+        <th>
+            Страна
+        </th>
+        <th>
+            Город
+        </th>
+        <th>
+            СТО
+        </th>
+        <th>
+            Деятельность
+        </th>
+        <th>
+            Должность
+        </th>
+        <th></th>
+    </tr>
+    @{
+
+    }
+    @foreach (var item in Model)
+    {
+        <tr class=@(item.Status? "success":"danger")>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NameCompany)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ServiceStationAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Activity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Position)
+            </td>
+            <td>
+                <input type="button" class="btn btn-primary" value="Прибыл" disabled="@(item.Status? true:false)" onclick="location.href='@Url.Action("UpdateStatus", "Admin",new { id = item.UserId})'" />
+            </td>
+        </tr>
+    }
+
+</table>
+    <input type="button" class="btn btn-primary" value="To Excel"  onclick="location.href='@Url.Action("ToExcel", "Admin")'" />

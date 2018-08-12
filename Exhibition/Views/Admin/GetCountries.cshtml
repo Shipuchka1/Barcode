@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Exhibition.Models.Country>
+
+@{
+    ViewBag.Title = "Countries";
+}
+
+<h2>GetCountries</h2>
+
+<p>
+    @Html.ActionLink("Add", "AddCountry")
+</p>
+<table class="table">
+    <tr>
+        <th>
+        Название
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "AddCountry", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "DeleteCountry", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

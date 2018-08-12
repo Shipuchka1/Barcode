@@ -1,0 +1,17 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
+
+}
+@{
+    ViewBag.Title = "Admin";
+}
+
+<h2>Index</h2>
+<input type="button" class="btn btn-primary" value="Посмотреть список посетителей" onclick="location.href='@Url.Action("GetClients", "Admin")'" />
+<br />
+<br />
+<input type="button" class="btn btn-primary" value="Редактировать список городов" onclick="location.href='@Url.Action("GetCities", "Admin")'" />
+<br />
+<br />
+<input type="button" class="btn btn-primary" value="Редактировать список стран" onclick="location.href='@Url.Action("GetCountries", "Admin")'" />
+
